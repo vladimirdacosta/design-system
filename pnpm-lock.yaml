@@ -419,6 +419,9 @@ importers:
       '@storybook/addon-themes':
         specifier: 7.6.16
         version: 7.6.16
+      '@storybook/addon-toolbars':
+        specifier: 7.6.17
+        version: 7.6.17
       '@storybook/addon-viewport':
         specifier: 7.6.17
         version: 7.6.17

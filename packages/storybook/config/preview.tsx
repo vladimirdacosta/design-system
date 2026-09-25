@@ -7,13 +7,36 @@ import type { Preview, StoryContext } from '@storybook/react';
 defineCustomElements();
 
 const preview: Preview = {
+  globalTypes: {
+    brand: {
+      name: 'Brand',
+      description: 'Select brand',
+      defaultValue: 'nijmegen',
+      toolbar: {
+        icon: 'paintbrush',
+        items: [
+          { value: 'nijmegen', title: 'Nijmegen' },
+          { value: 'triavium', title: 'Triavium' },
+          { value: 'leemkuil', title: 'De Leemkuil' },
+        ],
+        showName: true,
+      },
+    },
+  },
   decorators: [
     (Story: any, storyContext: StoryContext<any>) => {
       // Hack to make current args for a story available in the transformSource of the docs addon
       storyContext.parameters['args'] = storyContext.args;
 
+      const brandClass =
+        {
+          nijmegen: 'nijmegen-theme',
+          triavium: 'triavium-theme',
+          leemkuil: 'leemkuil-theme',
+        }[storyContext.globals.brand] ?? 'nijmegen-theme';
+
       return (
-        <div className="utrecht-document nijmegen-theme">
+        <div className={`utrecht-document ${brandClass}`}>
           <Story />
         </div>
       );
@@ -35,32 +58,6 @@ const preview: Preview = {
           description:
             'Used in production in a specific situation, evolving APIs based on feedback, breaking changes are still likely.',
         },
-        ALPHA: {
-          background: '#e0bc2e',
-          color: '#000000',
-          description:
-            'Used in prototypes and in projects that are still in development, breaking changes occur frequently and are not communicated.',
-        },
-        'WORK IN PROGRESS': {
-          background: '#cc0000',
-          color: '#ffffff',
-          description:
-            'Do not use in production. Does not follow semantic versioning and any published packages are for internal use only.',
-        },
-      },
-    },
-    options: {
-      storySort: {
-        method: 'configure',
-        includeNames: true,
-        order: [
-          'introduction',
-          ['Introductie', 'Developer introduction'],
-          'foundations',
-          ['Colors', 'Icons'],
-          'Components',
-          'Templates',
-        ],
       },
     },
   },

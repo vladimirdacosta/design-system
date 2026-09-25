@@ -17,6 +17,7 @@ const config: StorybookConfig = {
     '@etchteam/storybook-addon-status',
     '@whitespace/storybook-addon-html',
     '@storybook/addon-controls',
+    '@storybook/addon-toolbars',
     '@storybook/addon-themes',
     {
       name: '@storybook/addon-docs',
